@@ -6,9 +6,9 @@
     <session-factory>
     
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/stock_maquinaria</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">mysql</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/willyagu_maquinaria</property>
+        <property name="hibernate.connection.username">willyagu_root</property>
+        <property name="hibernate.connection.password">159Maquinaria</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
         
         <!-- JDBC connection pool (use the built-in) -->
@@ -20,7 +20,7 @@
         <property name="show_sql">true</property>
         
         <!-- Mapping files -->
-        <mapping resource="com/ws/Stock.hbm.xml"/>
+        <mapping resource="model/Model.hbm.xml"/>
         
     </session-factory>
 </hibernate-configuration>
