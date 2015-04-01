@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="model">
+
+    <class name="TipoMaquinaria" table="tipo_maquinaria">
+ 
+        <id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <property name="nombre">
+            <column name="nombre" length="255" not-null="true" />
+        </property>
+        
+        <set name="alquileres" cascade="all">
+         	<key column="tipo_maquinaria"/>
+         	<one-to-many class="Alquiler"/>
+      	</set>
+        
+    </class>
+
+    <class name="Municipalidad" table="municipalidad">
+ 
+        <id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <property name="nombre">
+            <column name="nombre" length="255" not-null="true" />
+        </property>
+        
+        <property name="ubicacion">
+            <column name="ubicacion" length="255" not-null="true" />
+        </property>
+ 
+    </class>
+    
+	<class name="Alquiler" table="alquiler">
+ 
+        <id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <many-to-one name="tipo_maquinaria" class="model.TipoMaquinaria" column="tipo_maquinaria" cascade="all" not-null="true" />
+        
+        <property name="p_hora">
+            <column name="p_hora" length="255" not-null="false" />
+        </property>
+ 
+    </class>
+	
+	<class name="StockMunicipalidad" table="stock_municipalidad">
+	
+        <id name="codigo" column="codigo" type="string">
+        </id>
+ 
+        <many-to-one name="municipalidad" class="model.Municipalidad" column="municipalidad" cascade="all" not-null="true" />
+        
+        <many-to-one name="tipoMaquinaria" class="model.TipoMaquinaria" column="tipo_maquinaria" cascade="all" not-null="true" />
+ 
+    </class>
+    
+    <class name="Movimiento" table="movimiento">
+    
+    	<id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <many-to-one name="stockMunicipalidad" class="model.StockMunicipalidad" column="stock_municipalidad" cascade="all" not-null="true" />
+		
+		<property name="fechaInicio">
+            <column name="fechaInicio" length="255" not-null="true" />
+        </property>
+        
+        <property name="fechaFin">
+            <column name="fechaFin" length="255" not-null="true" />
+        </property>
+        
+        <property name="estado">
+            <column name="estado" length="255" not-null="true" />
+        </property>
+		
+    </class>
+    
+	<class name="Principal" table="principal">
+ 
+        <id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <property name="dni">
+            <column name="dni" length="255" not-null="true" />
+        </property>
+        
+        <property name="ciudadano">
+            <column name="ciudadano" length="255" not-null="true" />
+        </property>
+        
+		<property name="direccionCiudadano">
+            <column name="direccionCiudadano" length="255" not-null="true" />
+        </property>
+        
+        <property name="ruc">
+            <column name="ruc" length="255" not-null="true" />
+        </property>
+        
+        <property name="empresa">
+            <column name="empresa" length="255" not-null="true" />
+        </property>
+        
+        <property name="direccionEmpresa">
+            <column name="direccionEmpresa" length="255" not-null="true" />
+        </property>
+        
+        <property name="costoTotal">
+            <column name="costoTotal" length="255" not-null="true" />
+        </property>
+        
+        <many-to-one name="municipalidad" class="model.Municipalidad" column="municipalidad" cascade="all" not-null="true" />
+ 
+    </class>
+    
+    <class name="DetalleStockMunicipalidad" table="detalle_stockmunicipalidad">
+    
+    	<id name="id" column="id">
+            <generator class="increment" />
+        </id>
+ 
+        <many-to-one name="stockMunicipalidad" class="model.StockMunicipalidad" column="stock_municipalidad" cascade="all" not-null="true" />
+		
+		<property name="fechaInicio">
+            <column name="fechaInicio" length="255" not-null="true" />
+        </property>
+        
+        <property name="fechaFin">
+            <column name="fechaFin" length="255" not-null="true" />
+        </property>
+        
+        <property name="costoTotal">
+            <column name="costoTotal" length="255" not-null="true" />
+        </property>
+		
+    </class>
+	
+</hibernate-mapping>
